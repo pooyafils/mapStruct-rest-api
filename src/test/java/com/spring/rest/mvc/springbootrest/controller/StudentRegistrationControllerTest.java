@@ -32,23 +32,18 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.json.BasicJsonParser;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import java.util.Arrays;
 import java.util.List;
-
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-////////////////////////////////////
 
 class StudentRegistrationControllerTest {
     @Mock
@@ -127,9 +122,12 @@ class StudentRegistrationControllerTest {
         returnstudentRegistration.setId(118);
         when(studentRegistrationService.saveStudentByDTO(anyInt(),any(StudentRegistrationDTO.class)))
                 .thenReturn(returnstudentRegistration);
-        mockMvc.perform(put("/student/112")
-                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(studentRegistration))
-
+       /* mockMvc.perform(put("")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(studentRegistration)))
+               .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.firstname", equalTo("Fred")));
+*/
 
     }
 

@@ -3,6 +3,7 @@ package com.spring.rest.mvc.springbootrest.controller;
 import com.spring.rest.mvc.springbootrest.domain.StudentRegistrationDTO;
 import com.spring.rest.mvc.springbootrest.domain.StudentRegistrationDTOList;
 import com.spring.rest.mvc.springbootrest.repository.StudentRegistrationRepository;
+import com.spring.rest.mvc.springbootrest.service.ResourceNotFoundException;
 import com.spring.rest.mvc.springbootrest.service.StudentRegistrationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,18 @@ public class StudentRegistrationController {
 }
 
 @PutMapping("/{id}")
+@ResponseStatus(HttpStatus.OK)
     public  StudentRegistrationDTO update(@PathVariable int id,@RequestBody StudentRegistrationDTO  studentRegistrationDTO){
         return studentRegistrationService.saveStudentByDTO(id,studentRegistrationDTO);
+}
+@PatchMapping("{id}")
+@ResponseStatus(HttpStatus.OK)
+    StudentRegistrationDTO patch(@PathVariable int id,@RequestBody StudentRegistrationDTO  studentRegistrationDTO){
+    return  studentRegistrationService.patchCustomer(id,studentRegistrationDTO);
+}
+@DeleteMapping("/{id}")
+@ResponseStatus(HttpStatus.OK)
+void delete(@PathVariable int id) {
+         studentRegistrationService.deleteStudentById(id);
 }
 }

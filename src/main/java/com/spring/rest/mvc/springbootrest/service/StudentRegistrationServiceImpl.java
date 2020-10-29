@@ -54,6 +54,31 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
         return saveAndReturn(student);
     }
 
+    @Override
+    public StudentRegistrationDTO patchCustomer(int id, StudentRegistrationDTO studentRegistrationDTO)  {
+ Integer ids=id;
+   return  studentRegistrationRepository.findById(ids).map(studentregisterargs -> {
+
+       if(studentRegistrationDTO.getName() != null){
+           studentregisterargs.setName(studentRegistrationDTO.getName());
+       }
+
+       if(studentRegistrationDTO.getFamilyName() != null){
+           studentregisterargs.setFamilyName(studentregisterargs.getFamilyName());
+       }
+
+       StudentRegistrationDTO returns=studentRegistrationMapper.
+               studentRegistrationToStudentRegistrationDTO
+                       (studentRegistrationRepository.save(studentregisterargs));
+      return returns;
+           }).orElseThrow(ResourceNotFoundException::new);
+    }
+
+    @Override
+    public void deleteStudentById(int id)  {
+        studentRegistrationRepository.deleteById(id);
+    }
+
     public StudentRegistrationDTO saveAndReturn(StudentRegistration studentRegistration){
         StudentRegistration studentRegistration1=studentRegistrationRepository.save(studentRegistration);
         StudentRegistrationDTO studentRegistrationDTOsave=studentRegistrationMapper.studentRegistrationToStudentRegistrationDTO(studentRegistration1);

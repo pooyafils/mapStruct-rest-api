@@ -10,4 +10,7 @@ public interface StudentRegistrationService {
     StudentRegistrationDTO createStudent(StudentRegistrationDTO  studentRegistrationDTO);
     StudentRegistrationDTO getById(int id);
     StudentRegistrationDTO saveStudentByDTO(Integer id,StudentRegistrationDTO studentRegistrationDTO);
+
+    StudentRegistrationDTO patchCustomer(int id, StudentRegistrationDTO studentRegistrationDTO);
+    void deleteStudentById(int id);
 }
